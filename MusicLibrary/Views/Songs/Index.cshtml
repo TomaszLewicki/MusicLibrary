@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MusicLibrary.Models.Song>
+
+@{
+    ViewBag.Title = "Song List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Songs</h2>
+<hr />
+<p>
+    
+    @using (Html.BeginForm())
+    {
+        <p>
+            Genre: @Html.DropDownList("songGenre","All")
+            Title: @Html.TextBox("SearchString")
+            <input type="submit" value="Filter" class="btn btn-success"/>
+        </p>
+    }
+</p>
+<table class="table table-bordered table-striped">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th>Options</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+            </td>
+        </tr>
+    }
+
+</table>
